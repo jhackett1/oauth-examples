@@ -8,7 +8,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             provider: auth.provider
         })
 
-        @user.email = auth.info.email,
+        @user.email = auth.info.email
+
+        @user.save
 
         if @user.persisted?
             sign_in_and_redirect @user, event: :authentication
