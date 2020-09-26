@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root "posts#index"
 
 
+
   namespace :api do
     namespace :v1 do
       get "me", to: "users#show"
