@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  before_action :check_logged_in
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   # GET /employees
@@ -70,5 +71,11 @@ class EmployeesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def employee_params
       params.require(:employee).permit(:name, :job_description)
+    end
+
+    def check_logged_in
+      unless current_user
+        redirect_to new_user_session_path
+      end
     end
 end
