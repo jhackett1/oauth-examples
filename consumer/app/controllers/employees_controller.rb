@@ -1,11 +1,11 @@
 class EmployeesController < ApplicationController
-  before_action :check_logged_in
+  before_action :authenticate_user!
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    @employees = current_user.employees
   end
 
   # GET /employees/1
@@ -15,7 +15,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/new
   def new
-    @employee = Employee.new
+    @employee = current_user.employees.new
   end
 
   # GET /employees/1/edit
@@ -25,7 +25,7 @@ class EmployeesController < ApplicationController
   # POST /employees
   # POST /employees.json
   def create
-    @employee = Employee.new(employee_params)
+    @employee = current_user.employees.new(employee_params)
 
     respond_to do |format|
       if @employee.save
@@ -65,7 +65,7 @@ class EmployeesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
-      @employee = Employee.find(params[:id])
+      @employee = current_user.employees.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
@@ -73,9 +73,4 @@ class EmployeesController < ApplicationController
       params.require(:employee).permit(:name, :job_description)
     end
 
-    def check_logged_in
-      unless current_user
-        redirect_to new_user_session_path
-      end
-    end
 end

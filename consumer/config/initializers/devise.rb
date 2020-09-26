@@ -1,3 +1,5 @@
+require "doorkeeper"
+
 # frozen_string_literal: true
 
 # Assuming you have not yet modified this file, each configuration option below
@@ -273,6 +275,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  config.omniauth :doorkeeper, "69QNnIh9UJK_UHnsLXloy_b_mEUjIDhLMjXL5FxA0hs", "mOJ8111C6NkQ1R5jdjhpkxTL23-KZy5aP2CwFi5C2Dc"
+  
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
